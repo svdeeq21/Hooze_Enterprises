@@ -18,7 +18,8 @@ function wrap(title: string, bodyHtml: string): string {
     <h1 style="font-size:22px;margin:0 0 16px;color:#fff;">${title}</h1>
     ${bodyHtml}
     <p style="margin-top:32px;padding-top:16px;border-top:1px solid #2a2d33;font-size:12px;color:#9a9a9a;">
-      Hooze Enterprises · Nigeria · hoozeenterprises@gmail.com
+      Hooze Enterprises · Nigeria · hoozeenterprises@gmail.com<br/>
+      Landed in spam or promotions? Please mark it "not spam" so future emails reach your inbox.
     </p>
   </div></body></html>`;
 }
@@ -46,6 +47,8 @@ What happens next:
 3. If there's a fit, we arrange a focused discovery conversation.
 
 Submitting an enquiry does not create a client relationship or guarantee availability.
+
+(This landed in spam or promotions? Please mark it "not spam" so future emails reach your inbox.)
 
 — Hooze Enterprises
 hoozeenterprises@gmail.com`;
@@ -126,6 +129,8 @@ It covers how to spot repetitive work, a short process-audit worksheet, common t
 
 If a specific problem stands out after reading it, you can tell us about it here:
 ${absoluteUrl("/start-a-project")}
+
+(This landed in spam or promotions? Please mark it "not spam" so future emails reach your inbox.)
 
 — Hooze Enterprises
 hoozeenterprises@gmail.com`;

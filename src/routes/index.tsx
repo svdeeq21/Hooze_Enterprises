@@ -6,6 +6,7 @@ import { process, projects, solutions, site } from "@/data/content";
 import { seo } from "@/lib/seo";
 import { track } from "@/lib/track";
 import heroImage from "@/assets/hero-system.jpg";
+import portraitUrl from "@/assets/sadiq-portrait.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -216,8 +217,18 @@ function Index() {
       </section>
 
       <section className="gutter hair-b py-20 md:py-28">
-        <div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
-          <p className="mono-label">Founder-led accountability</p>
+        <p className="mono-label">Founder-led accountability</p>
+        <div className="mt-12 grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+          <div className="relative w-full max-w-sm overflow-hidden border border-hairline bg-bone">
+            <img
+              src={portraitUrl}
+              alt="Portrait of Sadiq Shehu Musa, Founder of Hooze Enterprises"
+              width={768}
+              height={768}
+              loading="lazy"
+              className="block aspect-square w-full object-cover"
+            />
+          </div>
           <div>
             <h2 className="display text-[clamp(2rem,5vw,4rem)]">
               Built with ambition. Delivered with responsibility.

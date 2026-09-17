@@ -111,6 +111,10 @@ function StartProjectPage() {
               Your project details have been recorded, and a confirmation email is on its way. Hooze
               will follow up using your preferred contact method.
             </p>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Don't see the confirmation email within a few minutes? Check your spam or promotions
+              folder — and mark it "not spam" so our replies land in your inbox.
+            </p>
             <p className="mt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground">
               Reference · {reference}
             </p>

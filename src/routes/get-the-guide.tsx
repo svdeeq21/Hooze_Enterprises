@@ -107,6 +107,10 @@ function GetTheGuidePage() {
             <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">
               A copy is on its way to your inbox. You can also download it directly below.
             </p>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Don't see it within a few minutes? Check your spam or promotions folder — and mark
+              it "not spam" so future emails from us land in your inbox.
+            </p>
             <Button asChild size="lg" className="mt-8 w-fit">
               <a href={downloadUrl} download>
                 <Download className="mr-1" />
