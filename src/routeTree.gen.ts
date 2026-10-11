@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as GetTheGuideRouteImport } from './routes/get-the-guide'
+import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -25,6 +27,8 @@ import { Route as AdminEmailDeliveriesRouteImport } from './routes/admin/email-d
 import { Route as AdminEnquiriesRouteImport } from './routes/admin/enquiries'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminResourcesRouteImport } from './routes/admin/resources'
+import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
+import { Route as LocationsSlugRouteImport } from './routes/locations.$slug'
 import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 import { Route as AdminEnquiriesIdRouteImport } from './routes/admin/enquiries.$id'
@@ -47,6 +51,16 @@ const AdminRouteRoute = AdminRouteRouteImport.update({
 const GetTheGuideRoute = GetTheGuideRouteImport.update({
   id: '/get-the-guide',
   path: '/get-the-guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesRoute = IndustriesRouteImport.update({
+  id: '/industries',
+  path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationsRoute = LocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -109,6 +123,16 @@ const AdminResourcesRoute = AdminResourcesRouteImport.update({
   path: '/resources',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => IndustriesRoute,
+} as any)
+const LocationsSlugRoute = LocationsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => LocationsRoute,
+} as any)
 const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -130,6 +154,8 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/get-the-guide': typeof GetTheGuideRoute
+  '/industries': typeof IndustriesRouteWithChildren
+  '/locations': typeof LocationsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -141,6 +167,8 @@ export interface FileRoutesByFullPath {
   '/admin/enquiries': typeof AdminEnquiriesRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/resources': typeof AdminResourcesRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/locations/$slug': typeof LocationsSlugRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/work/$slug': typeof WorkSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -150,6 +178,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/get-the-guide': typeof GetTheGuideRoute
+  '/industries': typeof IndustriesRouteWithChildren
+  '/locations': typeof LocationsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -161,6 +191,8 @@ export interface FileRoutesByTo {
   '/admin/enquiries': typeof AdminEnquiriesRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/resources': typeof AdminResourcesRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/locations/$slug': typeof LocationsSlugRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/work/$slug': typeof WorkSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -172,6 +204,8 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/get-the-guide': typeof GetTheGuideRoute
+  '/industries': typeof IndustriesRouteWithChildren
+  '/locations': typeof LocationsRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -183,6 +217,8 @@ export interface FileRoutesById {
   '/admin/enquiries': typeof AdminEnquiriesRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/resources': typeof AdminResourcesRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/locations/$slug': typeof LocationsSlugRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/work/$slug': typeof WorkSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -195,6 +231,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/about'
     | '/get-the-guide'
+    | '/industries'
+    | '/locations'
     | '/privacy'
     | '/robots.txt'
     | '/sitemap.xml'
@@ -206,6 +244,8 @@ export interface FileRouteTypes {
     | '/admin/enquiries'
     | '/admin/login'
     | '/admin/resources'
+    | '/industries/$slug'
+    | '/locations/$slug'
     | '/solutions/$slug'
     | '/work/$slug'
     | '/admin/'
@@ -215,6 +255,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/get-the-guide'
+    | '/industries'
+    | '/locations'
     | '/privacy'
     | '/robots.txt'
     | '/sitemap.xml'
@@ -226,6 +268,8 @@ export interface FileRouteTypes {
     | '/admin/enquiries'
     | '/admin/login'
     | '/admin/resources'
+    | '/industries/$slug'
+    | '/locations/$slug'
     | '/solutions/$slug'
     | '/work/$slug'
     | '/admin'
@@ -236,6 +280,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/about'
     | '/get-the-guide'
+    | '/industries'
+    | '/locations'
     | '/privacy'
     | '/robots.txt'
     | '/sitemap.xml'
@@ -247,6 +293,8 @@ export interface FileRouteTypes {
     | '/admin/enquiries'
     | '/admin/login'
     | '/admin/resources'
+    | '/industries/$slug'
+    | '/locations/$slug'
     | '/solutions/$slug'
     | '/work/$slug'
     | '/admin/'
@@ -258,6 +306,8 @@ export interface RootRouteChildren {
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   GetTheGuideRoute: typeof GetTheGuideRoute
+  IndustriesRoute: typeof IndustriesRouteWithChildren
+  LocationsRoute: typeof LocationsRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -295,6 +345,20 @@ declare module '@tanstack/react-router' {
       path: '/get-the-guide'
       fullPath: '/get-the-guide'
       preLoaderRoute: typeof GetTheGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries': {
+      id: '/industries'
+      path: '/industries'
+      fullPath: '/industries'
+      preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/locations': {
+      id: '/locations'
+      path: '/locations'
+      fullPath: '/locations'
+      preLoaderRoute: typeof LocationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -381,6 +445,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminResourcesRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/industries/$slug': {
+      id: '/industries/$slug'
+      path: '/$slug'
+      fullPath: '/industries/$slug'
+      preLoaderRoute: typeof IndustriesSlugRouteImport
+      parentRoute: typeof IndustriesRoute
+    }
+    '/locations/$slug': {
+      id: '/locations/$slug'
+      path: '/$slug'
+      fullPath: '/locations/$slug'
+      preLoaderRoute: typeof LocationsSlugRouteImport
+      parentRoute: typeof LocationsRoute
+    }
     '/solutions/$slug': {
       id: '/solutions/$slug'
       path: '/$slug'
@@ -437,6 +515,30 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
   AdminRouteRouteChildren,
 )
 
+interface IndustriesRouteChildren {
+  IndustriesSlugRoute: typeof IndustriesSlugRoute
+}
+
+const IndustriesRouteChildren: IndustriesRouteChildren = {
+  IndustriesSlugRoute: IndustriesSlugRoute,
+}
+
+const IndustriesRouteWithChildren = IndustriesRoute._addFileChildren(
+  IndustriesRouteChildren,
+)
+
+interface LocationsRouteChildren {
+  LocationsSlugRoute: typeof LocationsSlugRoute
+}
+
+const LocationsRouteChildren: LocationsRouteChildren = {
+  LocationsSlugRoute: LocationsSlugRoute,
+}
+
+const LocationsRouteWithChildren = LocationsRoute._addFileChildren(
+  LocationsRouteChildren,
+)
+
 interface SolutionsRouteChildren {
   SolutionsSlugRoute: typeof SolutionsSlugRoute
 }
@@ -464,6 +566,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRouteRoute: AdminRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   GetTheGuideRoute: GetTheGuideRoute,
+  IndustriesRoute: IndustriesRouteWithChildren,
+  LocationsRoute: LocationsRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
