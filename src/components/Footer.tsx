@@ -50,6 +50,12 @@ export function Footer() {
               {item.label}
             </Link>
           ))}
+          <Link to="/industries" className="mono-label hover:text-foreground">
+            Industries
+          </Link>
+          <Link to="/locations" className="mono-label hover:text-foreground">
+            Locations
+          </Link>
           <Link to="/privacy" className="mono-label hover:text-foreground">
             Privacy
           </Link>

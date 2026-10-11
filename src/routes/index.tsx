@@ -23,6 +23,13 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Hooze Enterprises",
+          url: "https://hoozeenterprises.vercel.app",
+          description:
+            "Hooze builds custom software, WhatsApp sales systems, business automation and intelligent systems for businesses in Nigeria.",
+          sameAs: [
+            "https://github.com/svdeeq21",
+            "https://www.linkedin.com/in/sadiqshehu",
+          ],
           areaServed: "Nigeria",
           email: "hoozeenterprises@gmail.com",
           founder: { "@type": "Person", name: "Sadiq Shehu Musa" },

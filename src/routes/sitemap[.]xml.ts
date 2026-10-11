@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { projects, solutions } from "@/data/content";
+import { cities, cityPublished, industries, UPDATED } from "@/data/seo-pages";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -12,13 +13,17 @@ export const Route = createFileRoute("/sitemap.xml")({
           ...solutions.map((item) => `solutions/${item.slug}`),
           "work",
           ...projects.map((item) => `work/${item.slug}`),
+          "industries",
+          ...industries.map((i) => `industries/${i.slug}`),
+          "locations",
+          ...cities.filter(cityPublished).map((c) => `locations/${c.slug}`),
           "about",
           "start-a-project",
           "get-the-guide",
           "privacy",
           "terms",
         ];
-        const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map((path) => `  <url><loc>${origin}/${path}</loc></url>`).join("\n")}\n</urlset>`;
+        const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map((path) => `  <url><loc>${origin}/${path}</loc>${path.startsWith("industries") || path.startsWith("locations") ? `<lastmod>${UPDATED}</lastmod>` : ""}</url>`).join("\n")}\n</urlset>`;
         return new Response(body, {
           headers: {
             "content-type": "application/xml; charset=utf-8",
