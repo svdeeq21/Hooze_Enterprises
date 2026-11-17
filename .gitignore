@@ -31,11 +31,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment files — never commit real secrets
-.env
+# Local lead capture fallback + local secrets
+.data/
 .env.local
-.env.*.local
-.env.example
+.env
 
-# Vercel CLI project link
-.vercel

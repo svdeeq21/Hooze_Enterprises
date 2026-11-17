@@ -11,27 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AdminRouteRouteImport } from './routes/admin/route'
-import { Route as GetTheGuideRouteImport } from './routes/get-the-guide'
-import { Route as IndustriesRouteImport } from './routes/industries'
-import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as StartAProjectRouteImport } from './routes/start-a-project'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as WorkRouteImport } from './routes/work'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminEmailDeliveriesRouteImport } from './routes/admin/email-deliveries'
-import { Route as AdminEnquiriesRouteImport } from './routes/admin/enquiries'
-import { Route as AdminLoginRouteImport } from './routes/admin/login'
-import { Route as AdminResourcesRouteImport } from './routes/admin/resources'
-import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
-import { Route as LocationsSlugRouteImport } from './routes/locations.$slug'
-import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
-import { Route as WorkSlugRouteImport } from './routes/work.$slug'
-import { Route as AdminEnquiriesIdRouteImport } from './routes/admin/enquiries.$id'
+import { Route as WorkPraiseDynastyWhatsappSalesSystemRouteImport } from './routes/work.praise-dynasty-whatsapp-sales-system'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -43,34 +26,9 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRouteRoute = AdminRouteRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GetTheGuideRoute = GetTheGuideRouteImport.update({
-  id: '/get-the-guide',
-  path: '/get-the-guide',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndustriesRoute = IndustriesRouteImport.update({
-  id: '/industries',
-  path: '/industries',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LocationsRoute = LocationsRouteImport.update({
-  id: '/locations',
-  path: '/locations',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -78,243 +36,77 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SolutionsRoute = SolutionsRouteImport.update({
-  id: '/solutions',
-  path: '/solutions',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const StartAProjectRoute = StartAProjectRouteImport.update({
   id: '/start-a-project',
   path: '/start-a-project',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WorkRoute = WorkRouteImport.update({
-  id: '/work',
-  path: '/work',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminEmailDeliveriesRoute = AdminEmailDeliveriesRouteImport.update({
-  id: '/email-deliveries',
-  path: '/email-deliveries',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminEnquiriesRoute = AdminEnquiriesRouteImport.update({
-  id: '/enquiries',
-  path: '/enquiries',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminResourcesRoute = AdminResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => IndustriesRoute,
-} as any)
-const LocationsSlugRoute = LocationsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => LocationsRoute,
-} as any)
-const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => SolutionsRoute,
-} as any)
-const WorkSlugRoute = WorkSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => WorkRoute,
-} as any)
-const AdminEnquiriesIdRoute = AdminEnquiriesIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => AdminEnquiriesRoute,
-} as any)
+const WorkPraiseDynastyWhatsappSalesSystemRoute =
+  WorkPraiseDynastyWhatsappSalesSystemRouteImport.update({
+    id: '/work/praise-dynasty-whatsapp-sales-system',
+    path: '/work/praise-dynasty-whatsapp-sales-system',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/get-the-guide': typeof GetTheGuideRoute
-  '/industries': typeof IndustriesRouteWithChildren
-  '/locations': typeof LocationsRouteWithChildren
   '/privacy': typeof PrivacyRoute
-  '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/solutions': typeof SolutionsRouteWithChildren
   '/start-a-project': typeof StartAProjectRoute
-  '/terms': typeof TermsRoute
-  '/work': typeof WorkRouteWithChildren
-  '/admin/email-deliveries': typeof AdminEmailDeliveriesRoute
-  '/admin/enquiries': typeof AdminEnquiriesRouteWithChildren
-  '/admin/login': typeof AdminLoginRoute
-  '/admin/resources': typeof AdminResourcesRoute
-  '/industries/$slug': typeof IndustriesSlugRoute
-  '/locations/$slug': typeof LocationsSlugRoute
-  '/solutions/$slug': typeof SolutionsSlugRoute
-  '/work/$slug': typeof WorkSlugRoute
-  '/admin/': typeof AdminIndexRoute
-  '/admin/enquiries/$id': typeof AdminEnquiriesIdRoute
+  '/work/praise-dynasty-whatsapp-sales-system': typeof WorkPraiseDynastyWhatsappSalesSystemRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/get-the-guide': typeof GetTheGuideRoute
-  '/industries': typeof IndustriesRouteWithChildren
-  '/locations': typeof LocationsRouteWithChildren
   '/privacy': typeof PrivacyRoute
-  '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/solutions': typeof SolutionsRouteWithChildren
   '/start-a-project': typeof StartAProjectRoute
-  '/terms': typeof TermsRoute
-  '/work': typeof WorkRouteWithChildren
-  '/admin/email-deliveries': typeof AdminEmailDeliveriesRoute
-  '/admin/enquiries': typeof AdminEnquiriesRouteWithChildren
-  '/admin/login': typeof AdminLoginRoute
-  '/admin/resources': typeof AdminResourcesRoute
-  '/industries/$slug': typeof IndustriesSlugRoute
-  '/locations/$slug': typeof LocationsSlugRoute
-  '/solutions/$slug': typeof SolutionsSlugRoute
-  '/work/$slug': typeof WorkSlugRoute
-  '/admin': typeof AdminIndexRoute
-  '/admin/enquiries/$id': typeof AdminEnquiriesIdRoute
+  '/work/praise-dynasty-whatsapp-sales-system': typeof WorkPraiseDynastyWhatsappSalesSystemRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/get-the-guide': typeof GetTheGuideRoute
-  '/industries': typeof IndustriesRouteWithChildren
-  '/locations': typeof LocationsRouteWithChildren
   '/privacy': typeof PrivacyRoute
-  '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/solutions': typeof SolutionsRouteWithChildren
   '/start-a-project': typeof StartAProjectRoute
-  '/terms': typeof TermsRoute
-  '/work': typeof WorkRouteWithChildren
-  '/admin/email-deliveries': typeof AdminEmailDeliveriesRoute
-  '/admin/enquiries': typeof AdminEnquiriesRouteWithChildren
-  '/admin/login': typeof AdminLoginRoute
-  '/admin/resources': typeof AdminResourcesRoute
-  '/industries/$slug': typeof IndustriesSlugRoute
-  '/locations/$slug': typeof LocationsSlugRoute
-  '/solutions/$slug': typeof SolutionsSlugRoute
-  '/work/$slug': typeof WorkSlugRoute
-  '/admin/': typeof AdminIndexRoute
-  '/admin/enquiries/$id': typeof AdminEnquiriesIdRoute
+  '/work/praise-dynasty-whatsapp-sales-system': typeof WorkPraiseDynastyWhatsappSalesSystemRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin'
     | '/about'
-    | '/get-the-guide'
-    | '/industries'
-    | '/locations'
     | '/privacy'
-    | '/robots.txt'
     | '/sitemap.xml'
-    | '/solutions'
     | '/start-a-project'
-    | '/terms'
-    | '/work'
-    | '/admin/email-deliveries'
-    | '/admin/enquiries'
-    | '/admin/login'
-    | '/admin/resources'
-    | '/industries/$slug'
-    | '/locations/$slug'
-    | '/solutions/$slug'
-    | '/work/$slug'
-    | '/admin/'
-    | '/admin/enquiries/$id'
+    | '/work/praise-dynasty-whatsapp-sales-system'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/get-the-guide'
-    | '/industries'
-    | '/locations'
     | '/privacy'
-    | '/robots.txt'
     | '/sitemap.xml'
-    | '/solutions'
     | '/start-a-project'
-    | '/terms'
-    | '/work'
-    | '/admin/email-deliveries'
-    | '/admin/enquiries'
-    | '/admin/login'
-    | '/admin/resources'
-    | '/industries/$slug'
-    | '/locations/$slug'
-    | '/solutions/$slug'
-    | '/work/$slug'
-    | '/admin'
-    | '/admin/enquiries/$id'
+    | '/work/praise-dynasty-whatsapp-sales-system'
   id:
     | '__root__'
     | '/'
-    | '/admin'
     | '/about'
-    | '/get-the-guide'
-    | '/industries'
-    | '/locations'
     | '/privacy'
-    | '/robots.txt'
     | '/sitemap.xml'
-    | '/solutions'
     | '/start-a-project'
-    | '/terms'
-    | '/work'
-    | '/admin/email-deliveries'
-    | '/admin/enquiries'
-    | '/admin/login'
-    | '/admin/resources'
-    | '/industries/$slug'
-    | '/locations/$slug'
-    | '/solutions/$slug'
-    | '/work/$slug'
-    | '/admin/'
-    | '/admin/enquiries/$id'
+    | '/work/praise-dynasty-whatsapp-sales-system'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRouteRoute: typeof AdminRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  GetTheGuideRoute: typeof GetTheGuideRoute
-  IndustriesRoute: typeof IndustriesRouteWithChildren
-  LocationsRoute: typeof LocationsRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
-  RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  SolutionsRoute: typeof SolutionsRouteWithChildren
   StartAProjectRoute: typeof StartAProjectRoute
-  TermsRoute: typeof TermsRoute
-  WorkRoute: typeof WorkRouteWithChildren
+  WorkPraiseDynastyWhatsappSalesSystemRoute: typeof WorkPraiseDynastyWhatsappSalesSystemRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -333,46 +125,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/get-the-guide': {
-      id: '/get-the-guide'
-      path: '/get-the-guide'
-      fullPath: '/get-the-guide'
-      preLoaderRoute: typeof GetTheGuideRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/industries': {
-      id: '/industries'
-      path: '/industries'
-      fullPath: '/industries'
-      preLoaderRoute: typeof IndustriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/locations': {
-      id: '/locations'
-      path: '/locations'
-      fullPath: '/locations'
-      preLoaderRoute: typeof LocationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
-      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -382,13 +139,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/solutions': {
-      id: '/solutions'
-      path: '/solutions'
-      fullPath: '/solutions'
-      preLoaderRoute: typeof SolutionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/start-a-project': {
       id: '/start-a-project'
       path: '/start-a-project'
@@ -396,185 +146,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StartAProjectRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
+    '/work/praise-dynasty-whatsapp-sales-system': {
+      id: '/work/praise-dynasty-whatsapp-sales-system'
+      path: '/work/praise-dynasty-whatsapp-sales-system'
+      fullPath: '/work/praise-dynasty-whatsapp-sales-system'
+      preLoaderRoute: typeof WorkPraiseDynastyWhatsappSalesSystemRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/work': {
-      id: '/work'
-      path: '/work'
-      fullPath: '/work'
-      preLoaderRoute: typeof WorkRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/email-deliveries': {
-      id: '/admin/email-deliveries'
-      path: '/email-deliveries'
-      fullPath: '/admin/email-deliveries'
-      preLoaderRoute: typeof AdminEmailDeliveriesRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/enquiries': {
-      id: '/admin/enquiries'
-      path: '/enquiries'
-      fullPath: '/admin/enquiries'
-      preLoaderRoute: typeof AdminEnquiriesRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/login': {
-      id: '/admin/login'
-      path: '/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/resources': {
-      id: '/admin/resources'
-      path: '/resources'
-      fullPath: '/admin/resources'
-      preLoaderRoute: typeof AdminResourcesRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/industries/$slug': {
-      id: '/industries/$slug'
-      path: '/$slug'
-      fullPath: '/industries/$slug'
-      preLoaderRoute: typeof IndustriesSlugRouteImport
-      parentRoute: typeof IndustriesRoute
-    }
-    '/locations/$slug': {
-      id: '/locations/$slug'
-      path: '/$slug'
-      fullPath: '/locations/$slug'
-      preLoaderRoute: typeof LocationsSlugRouteImport
-      parentRoute: typeof LocationsRoute
-    }
-    '/solutions/$slug': {
-      id: '/solutions/$slug'
-      path: '/$slug'
-      fullPath: '/solutions/$slug'
-      preLoaderRoute: typeof SolutionsSlugRouteImport
-      parentRoute: typeof SolutionsRoute
-    }
-    '/work/$slug': {
-      id: '/work/$slug'
-      path: '/$slug'
-      fullPath: '/work/$slug'
-      preLoaderRoute: typeof WorkSlugRouteImport
-      parentRoute: typeof WorkRoute
-    }
-    '/admin/enquiries/$id': {
-      id: '/admin/enquiries/$id'
-      path: '/$id'
-      fullPath: '/admin/enquiries/$id'
-      preLoaderRoute: typeof AdminEnquiriesIdRouteImport
-      parentRoute: typeof AdminEnquiriesRoute
     }
   }
 }
 
-interface AdminEnquiriesRouteChildren {
-  AdminEnquiriesIdRoute: typeof AdminEnquiriesIdRoute
-}
-
-const AdminEnquiriesRouteChildren: AdminEnquiriesRouteChildren = {
-  AdminEnquiriesIdRoute: AdminEnquiriesIdRoute,
-}
-
-const AdminEnquiriesRouteWithChildren = AdminEnquiriesRoute._addFileChildren(
-  AdminEnquiriesRouteChildren,
-)
-
-interface AdminRouteRouteChildren {
-  AdminEmailDeliveriesRoute: typeof AdminEmailDeliveriesRoute
-  AdminEnquiriesRoute: typeof AdminEnquiriesRouteWithChildren
-  AdminLoginRoute: typeof AdminLoginRoute
-  AdminResourcesRoute: typeof AdminResourcesRoute
-  AdminIndexRoute: typeof AdminIndexRoute
-}
-
-const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminEmailDeliveriesRoute: AdminEmailDeliveriesRoute,
-  AdminEnquiriesRoute: AdminEnquiriesRouteWithChildren,
-  AdminLoginRoute: AdminLoginRoute,
-  AdminResourcesRoute: AdminResourcesRoute,
-  AdminIndexRoute: AdminIndexRoute,
-}
-
-const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
-  AdminRouteRouteChildren,
-)
-
-interface IndustriesRouteChildren {
-  IndustriesSlugRoute: typeof IndustriesSlugRoute
-}
-
-const IndustriesRouteChildren: IndustriesRouteChildren = {
-  IndustriesSlugRoute: IndustriesSlugRoute,
-}
-
-const IndustriesRouteWithChildren = IndustriesRoute._addFileChildren(
-  IndustriesRouteChildren,
-)
-
-interface LocationsRouteChildren {
-  LocationsSlugRoute: typeof LocationsSlugRoute
-}
-
-const LocationsRouteChildren: LocationsRouteChildren = {
-  LocationsSlugRoute: LocationsSlugRoute,
-}
-
-const LocationsRouteWithChildren = LocationsRoute._addFileChildren(
-  LocationsRouteChildren,
-)
-
-interface SolutionsRouteChildren {
-  SolutionsSlugRoute: typeof SolutionsSlugRoute
-}
-
-const SolutionsRouteChildren: SolutionsRouteChildren = {
-  SolutionsSlugRoute: SolutionsSlugRoute,
-}
-
-const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
-  SolutionsRouteChildren,
-)
-
-interface WorkRouteChildren {
-  WorkSlugRoute: typeof WorkSlugRoute
-}
-
-const WorkRouteChildren: WorkRouteChildren = {
-  WorkSlugRoute: WorkSlugRoute,
-}
-
-const WorkRouteWithChildren = WorkRoute._addFileChildren(WorkRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRouteRoute: AdminRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  GetTheGuideRoute: GetTheGuideRoute,
-  IndustriesRoute: IndustriesRouteWithChildren,
-  LocationsRoute: LocationsRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
-  RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  SolutionsRoute: SolutionsRouteWithChildren,
   StartAProjectRoute: StartAProjectRoute,
-  TermsRoute: TermsRoute,
-  WorkRoute: WorkRouteWithChildren,
+  WorkPraiseDynastyWhatsappSalesSystemRoute:
+    WorkPraiseDynastyWhatsappSalesSystemRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

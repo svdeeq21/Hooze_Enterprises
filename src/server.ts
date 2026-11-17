@@ -37,16 +37,16 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 
 function isH3SwallowedErrorBody(body: string): boolean {
   try {
-    const payload = JSON.parse(body) as {
-      unhandled?: unknown;
-      message?: unknown;
-    };
+    const payload = JSON.parse(body) as { unhandled?: unknown; message?: unknown };
     return payload.unhandled === true && payload.message === "HTTPError";
   } catch {
     return false;
   }
 }
 
+// Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
+// CompressionStream) or set content-encoding here or in a server route: the body gets encoded
+// twice and renders garbled.
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {

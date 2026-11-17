@@ -1,36 +1,36 @@
-// Shared head-metadata builder so every route produces an absolute canonical
-// URL, absolute og:url, and a default social share image, instead of each
-// route hand-rolling relative links that only resolve correctly by accident.
-import { absoluteUrl } from "@/lib/site-config";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
 
-const DEFAULT_OG_IMAGE = "/social-share.jpg";
-
-export function seo(params: {
+type SeoInput = {
   title: string;
   description: string;
   path: string;
-  type?: "website" | "article";
-  image?: string;
-  noindex?: boolean;
-}) {
-  const url = absoluteUrl(params.path);
-  const image = absoluteUrl(params.image ?? DEFAULT_OG_IMAGE);
-  const meta: Array<Record<string, string>> = [
-    { title: params.title },
-    { name: "description", content: params.description },
-    { property: "og:title", content: params.title },
-    { property: "og:description", content: params.description },
-    { property: "og:type", content: params.type ?? "website" },
-    { property: "og:url", content: url },
-    { property: "og:image", content: image },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: params.title },
-    { name: "twitter:description", content: params.description },
-    { name: "twitter:image", content: image },
-  ];
-  if (params.noindex) meta.push({ name: "robots", content: "noindex, nofollow" });
+  /** Set false for pages that should not appear in search results. */
+  index?: boolean;
+};
+
+/** Per-route head tags. The root route deliberately sets no og:image; every page sets its own. */
+export function seo({ title, description, path, index = true }: SeoInput) {
+  const url = absoluteUrl(path);
+  const image = `${siteConfig.url}/og-image.jpg`;
   return {
-    meta,
+    meta: [
+      { title },
+      { name: "description", content: description },
+      ...(index ? [] : [{ name: "robots", content: "noindex" }]),
+      { property: "og:site_name", content: siteConfig.name },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:image", content: image },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Hooze Enterprises: AI products and business systems" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
     links: [{ rel: "canonical", href: url }],
   };
 }

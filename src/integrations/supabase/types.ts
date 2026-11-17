@@ -1,379 +1,78 @@
-// NOTE: normally auto-generated via `supabase gen types typescript`. Hand-
-// maintained here to match supabase/migrations/20260916000000_crm_foundation.sql
-// because there is no live project to generate against yet. Regenerate this
-// file from the real production Supabase project once migrations are applied,
-// and drop this note.
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5";
+    PostgrestVersion: "14.18";
   };
   public: {
     Tables: {
-      contacts: {
+      guide_download_requests: {
         Row: {
-          business_name: string | null;
-          business_type: string | null;
           created_at: string;
           email: string;
-          first_landing_page: string | null;
-          first_referrer: string | null;
-          first_touch_at: string;
-          first_utm_campaign: string | null;
-          first_utm_content: string | null;
-          first_utm_medium: string | null;
-          first_utm_source: string | null;
+          full_name: string;
           id: string;
-          name: string;
+          marketing_consent: boolean;
           phone: string | null;
-          updated_at: string;
         };
         Insert: {
-          business_name?: string | null;
-          business_type?: string | null;
           created_at?: string;
           email: string;
-          first_landing_page?: string | null;
-          first_referrer?: string | null;
-          first_touch_at?: string;
-          first_utm_campaign?: string | null;
-          first_utm_content?: string | null;
-          first_utm_medium?: string | null;
-          first_utm_source?: string | null;
+          full_name: string;
           id?: string;
-          name: string;
+          marketing_consent?: boolean;
           phone?: string | null;
-          updated_at?: string;
         };
         Update: {
-          business_name?: string | null;
-          business_type?: string | null;
           created_at?: string;
           email?: string;
-          first_landing_page?: string | null;
-          first_referrer?: string | null;
-          first_touch_at?: string;
-          first_utm_campaign?: string | null;
-          first_utm_content?: string | null;
-          first_utm_medium?: string | null;
-          first_utm_source?: string | null;
+          full_name?: string;
           id?: string;
-          name?: string;
+          marketing_consent?: boolean;
           phone?: string | null;
-          updated_at?: string;
-        };
-        Relationships: [];
-      };
-      consent_records: {
-        Row: {
-          consent_status: boolean;
-          consent_text_version: string;
-          consent_type: string;
-          consented_at: string;
-          contact_id: string;
-          id: string;
-          source: string;
-          withdrawn_at: string | null;
-        };
-        Insert: {
-          consent_status: boolean;
-          consent_text_version: string;
-          consent_type: string;
-          consented_at?: string;
-          contact_id: string;
-          id?: string;
-          source?: string;
-          withdrawn_at?: string | null;
-        };
-        Update: {
-          consent_status?: boolean;
-          consent_text_version?: string;
-          consent_type?: string;
-          consented_at?: string;
-          contact_id?: string;
-          id?: string;
-          source?: string;
-          withdrawn_at?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "consent_records_contact_id_fkey";
-            columns: ["contact_id"];
-            isOneToOne: false;
-            referencedRelation: "contacts";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      resource_requests: {
-        Row: {
-          business_challenge: string | null;
-          contact_id: string;
-          created_at: string;
-          delivered_at: string | null;
-          delivery_status: string;
-          id: string;
-          landing_page: string | null;
-          referrer: string | null;
-          request_fingerprint: string;
-          resource_slug: string;
-          source: string;
-          utm_campaign: string | null;
-          utm_content: string | null;
-          utm_medium: string | null;
-          utm_source: string | null;
-        };
-        Insert: {
-          business_challenge?: string | null;
-          contact_id: string;
-          created_at?: string;
-          delivered_at?: string | null;
-          delivery_status?: string;
-          id?: string;
-          landing_page?: string | null;
-          referrer?: string | null;
-          request_fingerprint: string;
-          resource_slug?: string;
-          source?: string;
-          utm_campaign?: string | null;
-          utm_content?: string | null;
-          utm_medium?: string | null;
-          utm_source?: string | null;
-        };
-        Update: {
-          business_challenge?: string | null;
-          contact_id?: string;
-          created_at?: string;
-          delivered_at?: string | null;
-          delivery_status?: string;
-          id?: string;
-          landing_page?: string | null;
-          referrer?: string | null;
-          request_fingerprint?: string;
-          resource_slug?: string;
-          source?: string;
-          utm_campaign?: string | null;
-          utm_content?: string | null;
-          utm_medium?: string | null;
-          utm_source?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "resource_requests_contact_id_fkey";
-            columns: ["contact_id"];
-            isOneToOne: false;
-            referencedRelation: "contacts";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      email_deliveries: {
-        Row: {
-          attempt_count: number;
-          created_at: string;
-          email_type: string;
-          error_message: string | null;
-          id: string;
-          provider_message_id: string | null;
-          recipient: string;
-          related_id: string;
-          related_table: string;
-          status: string;
-          updated_at: string;
-        };
-        Insert: {
-          attempt_count?: number;
-          created_at?: string;
-          email_type: string;
-          error_message?: string | null;
-          id?: string;
-          provider_message_id?: string | null;
-          recipient: string;
-          related_id: string;
-          related_table: string;
-          status?: string;
-          updated_at?: string;
-        };
-        Update: {
-          attempt_count?: number;
-          created_at?: string;
-          email_type?: string;
-          error_message?: string | null;
-          id?: string;
-          provider_message_id?: string | null;
-          recipient?: string;
-          related_id?: string;
-          related_table?: string;
-          status?: string;
-          updated_at?: string;
-        };
-        Relationships: [];
-      };
-      enquiry_notes: {
-        Row: {
-          author_email: string;
-          created_at: string;
-          enquiry_id: string;
-          id: string;
-          note: string;
-        };
-        Insert: {
-          author_email: string;
-          created_at?: string;
-          enquiry_id: string;
-          id?: string;
-          note: string;
-        };
-        Update: {
-          author_email?: string;
-          created_at?: string;
-          enquiry_id?: string;
-          id?: string;
-          note?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "enquiry_notes_enquiry_id_fkey";
-            columns: ["enquiry_id"];
-            isOneToOne: false;
-            referencedRelation: "project_enquiries";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      site_events: {
-        Row: {
-          created_at: string;
-          event_type: string;
-          id: string;
-          landing_page: string | null;
-          metadata: Json | null;
-          referrer: string | null;
-          session_id: string;
-          utm_campaign: string | null;
-          utm_content: string | null;
-          utm_medium: string | null;
-          utm_source: string | null;
-        };
-        Insert: {
-          created_at?: string;
-          event_type: string;
-          id?: string;
-          landing_page?: string | null;
-          metadata?: Json | null;
-          referrer?: string | null;
-          session_id: string;
-          utm_campaign?: string | null;
-          utm_content?: string | null;
-          utm_medium?: string | null;
-          utm_source?: string | null;
-        };
-        Update: {
-          created_at?: string;
-          event_type?: string;
-          id?: string;
-          landing_page?: string | null;
-          metadata?: Json | null;
-          referrer?: string | null;
-          session_id?: string;
-          utm_campaign?: string | null;
-          utm_content?: string | null;
-          utm_medium?: string | null;
-          utm_source?: string | null;
         };
         Relationships: [];
       };
       project_enquiries: {
         Row: {
-          budget_range: string | null;
-          business_name: string;
-          consent: boolean;
-          contact_id: string | null;
+          company: string | null;
+          contact_method: string;
           created_at: string;
-          current_tools: string | null;
           email: string;
+          full_name: string;
+          help_type: string;
           id: string;
-          landing_page: string | null;
-          name: string;
-          preferred_contact: string;
-          problem: string;
-          project_type: string;
-          referrer: string | null;
-          request_fingerprint: string;
-          source: string;
+          message: string;
+          phone: string | null;
           status: string;
-          timeline: string | null;
-          updated_at: string;
-          utm_campaign: string | null;
-          utm_content: string | null;
-          utm_medium: string | null;
-          utm_source: string | null;
-          whatsapp: string | null;
         };
         Insert: {
-          budget_range?: string | null;
-          business_name: string;
-          consent: boolean;
-          contact_id?: string | null;
+          company?: string | null;
+          contact_method?: string;
           created_at?: string;
-          current_tools?: string | null;
           email: string;
+          full_name: string;
+          help_type: string;
           id?: string;
-          landing_page?: string | null;
-          name: string;
-          preferred_contact?: string;
-          problem: string;
-          project_type: string;
-          referrer?: string | null;
-          request_fingerprint: string;
-          source?: string;
+          message: string;
+          phone?: string | null;
           status?: string;
-          timeline?: string | null;
-          updated_at?: string;
-          utm_campaign?: string | null;
-          utm_content?: string | null;
-          utm_medium?: string | null;
-          utm_source?: string | null;
-          whatsapp?: string | null;
         };
         Update: {
-          budget_range?: string | null;
-          business_name?: string;
-          consent?: boolean;
-          contact_id?: string | null;
+          company?: string | null;
+          contact_method?: string;
           created_at?: string;
-          current_tools?: string | null;
           email?: string;
+          full_name?: string;
+          help_type?: string;
           id?: string;
-          landing_page?: string | null;
-          name?: string;
-          preferred_contact?: string;
-          problem?: string;
-          project_type?: string;
-          referrer?: string | null;
-          request_fingerprint?: string;
-          source?: string;
+          message?: string;
+          phone?: string | null;
           status?: string;
-          timeline?: string | null;
-          updated_at?: string;
-          utm_campaign?: string | null;
-          utm_content?: string | null;
-          utm_medium?: string | null;
-          utm_source?: string | null;
-          whatsapp?: string | null;
         };
-        Relationships: [
-          {
-            foreignKeyName: "project_enquiries_contact_id_fkey";
-            columns: ["contact_id"];
-            isOneToOne: false;
-            referencedRelation: "contacts";
-            referencedColumns: ["id"];
-          },
-        ];
+        Relationships: [];
       };
     };
     Views: {

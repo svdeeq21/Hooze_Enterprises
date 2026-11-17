@@ -1,37 +1,62 @@
-# Hooze Enterprises — website
+# Hooze Enterprises website
 
-A business-acquisition and lead-management website for Hooze Enterprises, built with TanStack Start, React, TypeScript, Supabase and Gmail SMTP (via nodemailer), deployed on Vercel.
+TanStack Start (React 19 + Vite 8 + Tailwind v4) site. Originally exported from Lovable; now set up to run on its own machine.
 
-This started as a Lovable export and is being taken independent of Lovable — see `DEPLOYMENT.md` for the full setup and launch checklist before shipping this to production.
+## Run it on your PC
 
-## What this site does
-
-- Marketing pages (home, solutions, work, about) built around real business outcomes.
-- **Start a project** — a full project-enquiry form with server-side validation, spam/rate-limiting, contact linking, and automatic confirmation + internal-notification emails via Gmail SMTP.
-- **Get the guide** — a free lead magnet (the Business Automation Starter Kit, `public/resources/business-automation-starter-kit.pdf`) with a short, low-friction form and its own consent tier.
-- A shared **contacts** model so the same person's enquiry and resource request link to one record instead of creating duplicates, with UTM/referrer attribution captured on both.
-- A first-party, privacy-conscious **event log** (`site_events`) for form-funnel and channel attribution — no third-party analytics.
-- A password-protected **admin section** (`/admin`) for managing enquiries, resource requests, and email delivery failures, gated by Supabase Auth plus an explicit email allowlist.
-
-## Local development
+Requires **Node 20+** (22 recommended). Works on Windows, macOS and Linux.
 
 ```sh
-npm install
-cp .env.example .env   # fill in real values — see DEPLOYMENT.md
-npm run dev
+npm install        # .npmrc sets legacy-peer-deps; plain `npm install` otherwise crashes on the rolldown override
+npm run dev        # http://localhost:5173
 ```
 
-## Quality checks
+Other commands:
 
-```sh
-npm run build   # vite build (nitro, pinned to the "vercel" preset)
-npx tsc --noEmit -p tsconfig.json
-npm run lint
-```
+| Command | What it does |
+| --- | --- |
+| `npm run typecheck` | TypeScript check |
+| `npm run lint` | ESLint (+ Prettier) |
+| `npm test` | Unit and integrity tests (schemas, rate limiter, routes, links, assets, business facts) |
+| `npm run build:node` | Production build as a Node server (`.output/`) |
+| `npm run start` | Serve that build: `http://localhost:3000` (set `PORT` to change) |
+| `npm run preview` | `build:node` then `start` |
+| `npm run build` | Lovable's default build (Cloudflare Worker target). Builds fine, but cannot be run locally with `vite preview` |
+| `npm run guide:pdf` | Regenerate the starter-kit PDF (needs Python + `pip install reportlab`) |
 
-## Built with
+### Forms in local development
 
-- TanStack Start (React 19, TypeScript)
-- Supabase (Postgres, Auth, RLS)
-- Gmail SMTP via nodemailer (transactional email)
-- Tailwind CSS
+With no `SUPABASE_SERVICE_ROLE_KEY` set, both forms (free guide, `/start-a-project`) still work in `npm run dev`:
+submissions are appended to `.data/guide-requests.jsonl` and `.data/project-enquiries.jsonl` (git-ignored).
+**In a production build, missing storage keys make the forms show an error instead of pretending to succeed.**
+
+## Environment variables
+
+Copy `.env.example` to `.env.local` (git-ignored) and fill in. On your host (Vercel etc.) set the same names in project settings.
+
+- `VITE_SITE_URL` final public URL (used for canonical links, sitemap, social cards)
+- `VITE_SUPABASE_*`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` your Supabase project
+- `SUPABASE_SERVICE_ROLE_KEY` **server only, never `VITE_`-prefixed**
+- Optional: `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `LEAD_NOTIFY_EMAIL` emails you on every new lead
+
+The `.env` file that came from Lovable points at the Lovable-managed dev database. Replace it with your own production project.
+
+## Database
+
+Run these in the Supabase SQL editor, in order, **before deploying**:
+
+1. `drizzle/migrations/0000_guide_download_requests.sql` (already applied if you use the existing Lovable project)
+2. `database/0001_guide_phone_optional_and_consent.sql`
+3. `database/0002_project_enquiries.sql`
+
+Browser roles have no access to either table; only server code using the service-role key reads or writes.
+
+## Where things live
+
+- `src/lib/site-config.ts` **all contact details, URLs and case-study facts** (search for `CONFIRM`)
+- `src/routes/` pages: `/`, `/about`, `/start-a-project`, `/work/praise-dynasty-whatsapp-sales-system`, `/privacy`, `/sitemap.xml`
+- `src/components/site/` header, footer, forms, Hooze AI walkthrough
+- `src/lib/*.functions.ts` server functions for the two forms; `src/lib/leads.server.ts` storage + notification
+- `public/downloads/` the starter-kit PDF; `design-source/` original large images (not shipped)
+
+See `AUDIT-STATUS.md` for what has been verified and what still needs your input.

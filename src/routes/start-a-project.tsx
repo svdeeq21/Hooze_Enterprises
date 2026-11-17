@@ -1,259 +1,73 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState, type FormEvent } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { submitEnquiry } from "@/lib/enquiries.functions";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { getSubmissionAttribution } from "@/lib/attribution";
-import { track } from "@/lib/track";
+import { MessageCircle, Mail } from "lucide-react";
+import { PageShell } from "@/components/site/PageShell";
+import { ProjectEnquiryForm } from "@/components/site/ProjectEnquiryForm";
+import { Eyebrow } from "@/components/site/primitives";
+import { track } from "@/lib/analytics";
 import { seo } from "@/lib/seo";
+import { mailtoUrl, siteConfig, whatsappUrl } from "@/lib/site-config";
 
 export const Route = createFileRoute("/start-a-project")({
+  validateSearch: (search: Record<string, unknown>): { topic?: string } =>
+    typeof search["topic"] === "string" ? { topic: search["topic"] } : {},
   head: () =>
     seo({
-      title: "Start a Software or Automation Project — Hooze",
+      title: "Start a project | Hooze Enterprises",
       description:
-        "Tell Hooze what is not working in your business. Start a focused conversation about custom software, automation or intelligent systems.",
+        "Tell Hooze Enterprises what you need to build or automate. A short form, and a reply from a real person.",
       path: "/start-a-project",
     }),
-  component: StartProjectPage,
+  component: StartAProject,
 });
 
-const field = "mt-2 h-12 rounded-none bg-secondary/30 px-4";
-
-function StartProjectPage() {
-  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [error, setError] = useState("");
-  const [reference, setReference] = useState("");
-  const started = useRef(false);
-
-  function handleFirstInteraction() {
-    if (started.current) return;
-    started.current = true;
-    track("project_form_started");
-  }
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setState("sending");
-    setError("");
-    const form = new FormData(event.currentTarget);
-    const attribution = getSubmissionAttribution();
-    const projectType = String(form.get("projectType")) as
-      | "custom-software"
-      | "business-automation"
-      | "intelligent-system"
-      | "digital-product"
-      | "not-sure";
-    try {
-      const result = await submitEnquiry({
-        data: {
-          name: String(form.get("name")),
-          businessName: String(form.get("businessName")),
-          email: String(form.get("email")),
-          whatsapp: String(form.get("whatsapp") ?? ""),
-          projectType,
-          problem: String(form.get("problem")),
-          currentTools: String(form.get("currentTools") ?? ""),
-          budgetRange: String(form.get("budgetRange") ?? ""),
-          timeline: String(form.get("timeline") ?? ""),
-          preferredContact: String(form.get("preferredContact")) as "email" | "whatsapp",
-          consent: form.get("consent") === "on" ? true : (undefined as never),
-          website: String(form.get("website") ?? ""),
-          utmSource: attribution.utmSource,
-          utmMedium: attribution.utmMedium,
-          utmCampaign: attribution.utmCampaign,
-          utmContent: attribution.utmContent,
-          landingPage: attribution.landingPage,
-          referrer: attribution.referrer,
-        },
-      });
-      setReference(result.reference);
-      setState("sent");
-      track("project_form_submitted", { projectType });
-    } catch (cause) {
-      setError(
-        cause instanceof Error
-          ? cause.message
-          : "We could not save your enquiry. Please try again.",
-      );
-      setState("error");
-    }
-  }
-
+function StartAProject() {
+  const { topic } = Route.useSearch();
   return (
-    <section className="gutter pb-24 pt-28">
-      <div className="grid gap-16 lg:grid-cols-[.75fr_1.25fr]">
-        <div>
-          <p className="mono-label text-signal">Start a project</p>
-          <h1 className="display mt-7 text-[clamp(2.5rem,7vw,5.5rem)]">
-            Tell us what is <span className="text-signal">not working.</span>
-          </h1>
-          <p className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            You do not need a technical specification. Describe the business problem, the current
-            process and what better would look like.
-          </p>
-          <div className="mt-10 hair-t pt-7">
-            <p className="mono-label">What happens next</p>
-            <ol className="mt-5 space-y-4 text-sm text-muted-foreground">
-              <li>01 · Hooze reviews the business problem you described.</li>
-              <li>02 · You receive a confirmation email with your submitted details.</li>
-              <li>03 · We follow up using your preferred contact method.</li>
-            </ol>
+    <PageShell>
+      <section className="py-16 md:py-24">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-12 gap-x-0 gap-y-10 md:gap-x-10 px-5 md:px-10 xl:px-16">
+          <div className="col-span-12 md:col-span-5">
+            <Eyebrow>CUSTOM ENGINEERING</Eyebrow>
+            <h1 className="mt-6 max-w-[560px] font-display text-4xl font-semibold leading-[1.05] md:text-6xl">
+              Have a business problem that needs a{" "}
+              <span className="text-amber">technical solution?</span>
+            </h1>
+            <p className="mt-6 max-w-[460px] text-sm leading-6 text-muted-foreground">
+              Tell us what you need to build or automate. You don’t need technical language or a
+              finished brief. We’ll read it, reply, and suggest a sensible next step, even if that
+              step is “you don’t need software for this.”
+            </p>
+            <div className="mt-10 border-t border-border pt-6">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                PREFER TO TALK?
+              </p>
+              <div className="mt-4 flex flex-col gap-1">
+                <a
+                  href={whatsappUrl("Hello Hooze, I'd like to talk about a project.")}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("contact_whatsapp", { location: "start-a-project" })}
+                  className="inline-flex min-h-11 items-center gap-3 text-sm transition-colors hover:text-amber"
+                >
+                  <MessageCircle aria-hidden="true" className="size-4 text-amber" />
+                  WhatsApp Hooze
+                </a>
+                <a
+                  href={mailtoUrl("Project enquiry for Hooze Enterprises")}
+                  onClick={() => track("contact_email", { location: "start-a-project" })}
+                  className="inline-flex min-h-11 items-center gap-3 break-all text-sm transition-colors hover:text-amber"
+                >
+                  <Mail aria-hidden="true" className="size-4 shrink-0 text-amber" />
+                  {siteConfig.contact.email}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="col-span-12 border border-border bg-surface p-5 md:col-span-6 md:col-start-7 md:p-8">
+            <ProjectEnquiryForm initialTopic={topic} />
           </div>
         </div>
-        {state === "sent" ? (
-          <div className="flex min-h-[420px] flex-col justify-center border border-hairline p-8">
-            <CheckCircle2 className="size-10 text-signal" />
-            <h2 className="display mt-8 text-4xl">We received your enquiry.</h2>
-            <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">
-              Your project details have been recorded, and a confirmation email is on its way. Hooze
-              will follow up using your preferred contact method.
-            </p>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Don't see the confirmation email within a few minutes? Check your spam or promotions
-              folder — and mark it "not spam" so our replies land in your inbox.
-            </p>
-            <p className="mt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground">
-              Reference · {reference}
-            </p>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            onFocus={handleFirstInteraction}
-            className="grid gap-6 border border-hairline p-6 md:p-10"
-          >
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Your name" name="name" required />
-              <Field label="Business name" name="businessName" required />
-              <Field label="Email" name="email" type="email" required />
-              <Field label="WhatsApp (optional)" name="whatsapp" type="tel" />
-            </div>
-            <label className="text-sm font-medium">
-              What kind of project?
-              <select
-                name="projectType"
-                required
-                className={`${field} block w-full border border-input text-foreground`}
-                defaultValue=""
-              >
-                <option value="" disabled>
-                  Choose one
-                </option>
-                <option value="custom-software">Custom software</option>
-                <option value="business-automation">Business automation</option>
-                <option value="intelligent-system">Intelligent system / AI</option>
-                <option value="digital-product">Digital product</option>
-                <option value="not-sure">Not sure yet</option>
-              </select>
-            </label>
-            <label className="text-sm font-medium">
-              Describe the problem
-              <Textarea
-                name="problem"
-                required
-                minLength={30}
-                maxLength={3000}
-                rows={7}
-                className="mt-2 rounded-none bg-secondary/30 p-4"
-                placeholder="What happens today, where does it break down, and what should improve?"
-              />
-            </label>
-            <Field
-              label="Current tools (optional)"
-              name="currentTools"
-              placeholder="WhatsApp, spreadsheets, existing CRM…"
-            />
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Budget range (optional)" name="budgetRange" />
-              <Field label="Timeline (optional)" name="timeline" />
-            </div>
-            <fieldset>
-              <legend className="text-sm font-medium">Preferred contact</legend>
-              <div className="mt-3 flex gap-6 text-sm">
-                <label>
-                  <input
-                    type="radio"
-                    name="preferredContact"
-                    value="email"
-                    defaultChecked
-                    className="mr-2 accent-amber-500"
-                  />
-                  Email
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="preferredContact"
-                    value="whatsapp"
-                    className="mr-2 accent-amber-500"
-                  />
-                  WhatsApp
-                </label>
-              </div>
-            </fieldset>
-            <input
-              name="website"
-              tabIndex={-1}
-              autoComplete="off"
-              className="hidden"
-              aria-hidden="true"
-            />
-            <label className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground">
-              <input type="checkbox" name="consent" required className="mt-1 accent-amber-500" />I
-              agree that Hooze may use these details to respond to this enquiry. See the{" "}
-              <a href="/privacy" className="underline hover:text-foreground">
-                privacy policy
-              </a>
-              .
-            </label>
-            {state === "error" && (
-              <p role="alert" className="text-sm text-destructive">
-                {error}
-              </p>
-            )}
-            <Button type="submit" size="lg" disabled={state === "sending"}>
-              {state === "sending" ? (
-                "Sending…"
-              ) : (
-                <>
-                  Send enquiry <ArrowRight />
-                </>
-              )}
-            </Button>
-          </form>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  required = false,
-  placeholder,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <label className="text-sm font-medium">
-      {label}
-      <Input
-        name={name}
-        type={type}
-        required={required}
-        maxLength={255}
-        placeholder={placeholder}
-        className={field}
-      />
-    </label>
+      </section>
+    </PageShell>
   );
 }
